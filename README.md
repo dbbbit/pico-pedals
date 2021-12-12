@@ -1,50 +1,60 @@
 # pico-pedals
 
-### ���
+### 简介
 
-`pico-pedals` ��Ŀ���ṩ����������ģ�� `̤�������` ��������������������λ��������Ӳ�����ϼ���ع̼���
+`pico-pedals` 项目将提供完整的赛车模拟 `踏板控制器` 方案，包括但不限于上位机软件、硬件资料及相关固件。
 
-����Ŀ֧�������ҵ��Ȩ�����ο�����ֻ���ṩƷ��ID������ԭ���������Ϣ���ɡ�
+本项目支持免费商业授权，只需提供品牌ID并保留原作者相关信息即可。
 
-### Ŀ¼˵��
+### 目录说明
 
-- Doc��ʹ���ĵ�������ͼ��
-- Software����λ�� GUI ����
-- Firmware�����׹̼�
+- Doc：使用文档、接线图等
+- Software：上位机配置软件
+- Firmware：芯片固件
 
-### ���ٿ�ʼ
+### 快速开始
 
-�����ȸ���򵥵�ʹ��оƬ�ڰ������������ṩ��������ADCģ�顢���ش�������ʹ���ĵ���
+这里先给最简单的使用案例，后续将提供更多称重传感器\放大模块\ADC模块使用文档。
 
-����ͼ������ݮ��PicoΪ����û���������Ŀ���Ƶ�������
+#### 接线图
+- 以树莓派 Pico 为例，没错这就是项目名称的由来
+- Pico 自带 ADC 支持最大电压 3.3v 输入，如果使用VSYS（5v）作为 VCC， 输入ADC前要用电阻分压到 3.3v 以下。
+- 踏板信号可以使用来自电位器、霍尔传感器或者是 INA12x/AD62x 之类的放大器输出。
 
-�����ź� -- GPIO_26
-ɲ���ź� -- GPIO_27
-����ź� -- GPIO_28
-VCC     -- ADC_VERF(3v3)
-GND     -- AGND
+<img src="https://github.com/dbbbit/pico-pedals/blob/master/Doc/pico-pin.png" />
 
-- PICO�Դ� ADC ֧�����3v3���룬���ʹ��VSYS��5v����Ϊ VCC�� ����ADCǰҪ�õ����ѹ��3V3���¡�
-- ̤���źſ���ʹ�����Ե�λ�������������������� INA122/AD62x ֮��ķŴ��������
+```code
+油门信号 -- GPIO_26
+刹车信号 -- GPIO_27
+离合信号 -- GPIO_28
+VCC  -- ADC_VREF(3v3)
+GND  -- AGND
+```
 
-�̼���¼
+#### 固件烧录
 
-��ס�������ϵ�BOOT��ť������USB�����ߣ�����Ƭ�̺��ͷŰ�ť�������ļ��������п���һ���ɶ�д�Ĵ洢����
-�϶� Firmware/rp2040 Ŀ¼�µĹ̼����洢���м��������¼��֮��Ϳ��Դ���������У׼���á�
+```code
+按住开发板上的BOOT按钮，插入USB数据线，保持片刻后释放按钮即可在文件管理器中看到一个可读写的存储器。
+拖动 Firmware/rp2040 目录下的固件到存储器中即可完成烧录，之后就可以打开软件进行校准配置。
+```
 
-��������
-У׼����ÿ��̤��ȵ��ײ��������ֵ���У׼��
+#### 软件配置
+<img src="https://github.com/dbbbit/pico-pedals/blob/master/Doc/GUI.png" width="800"/>
 
-### ����
+```code
+校准：将每个踏板踩到底并保存最大值完成校准。
+```
 
-- GUI ����Դ��� pico-pedals-gui����������
-    - ������֧�����д� usb-hid ���ܵ�оƬ
-    - �̼���Ҫʵ��Լ���� `����Э��` (�ĵ�������)
+### 开发
 
-- ��֧��оƬ
-    - ��ݮ�� `RP2040`
+- GUI 软件源码见 pico-pedals-gui（待发布）
+    - 理论上支持所有带 usb-hid 功能的芯片
+    - 固件需要实现约定的 `配置协议` (文档待补充)
 
-- ��֧��оƬ
+- 已支持芯片
+    - 树莓派 `RP2040`
+
+- 计划支持芯片
     - stm32c8t6 
-    - arduino micro pro
+    - arduino ATMEGA32U4 
 
