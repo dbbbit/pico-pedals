@@ -47,14 +47,14 @@ GND  -- AGND
 
 ### 开发
 
-- GUI 软件源码见 pico-pedals-gui（待发布）
+- GUI 软件源码见 pico-pedals-gui（Star过百即发布）
     - 理论上支持所有带 usb-hid 功能的芯片
-    - 固件需要实现约定的 `配置协议` (文档待补充)
+    - 固件需要实现约定的 `配置协议`
 
 - 已支持芯片
     - 树莓派 `RP2040`
 
-- 计划支持芯片
+- 待支持芯片
     - stm32c8t6 
     - arduino ATMEGA32U4 
 
